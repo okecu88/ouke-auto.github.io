@@ -21,6 +21,15 @@
                     fontFamily: {
                         sans: ['Inter','system-ui','sans-serif'],
                     },
+                    // 核心修复：扩展屏幕断点，支持超大屏
+                    screens: {
+                        'sm': '640px',
+                        'md': '768px',
+                        'lg': '1024px',
+                        'xl': '1280px',
+                        '2xl': '1536px',
+                        '3xl': '1920px',
+                    }
                 }
             }
         }
@@ -38,13 +47,11 @@
             .scrollbar-hide::-webkit-scrollbar { display: none; }
         }
 
-        /* 核心修复：全局样式，解决导航栏遮挡问题 */
+        /* 核心修复：全局样式 */
         html { 
             scroll-behavior: smooth; 
-            /* 修复锚点跳转被导航栏遮挡 */
             scroll-padding-top: 80px; 
         }
-        /* 核心修复：给body加顶部内边距，正好等于导航栏高度，避免页面内容被固定导航栏盖住 */
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: #1D3557;
@@ -54,12 +61,39 @@
             overflow-x: hidden;
         }
 
+        /* 核心修复：自定义宽容器，替代 Tailwind 默认 container */
+        .wide-container {
+            width: 100%;
+            max-width: 100%; /* 移除最大宽度限制，全屏 */
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem; /* 16px */
+            padding-right: 1rem;
+        }
+        
+        /* 响应式调整内边距，大屏更宽，小屏适中 */
+        @media (min-width: 640px) {
+            .wide-container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .wide-container {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+        @media (min-width: 1536px) {
+            .wide-container {
+                padding-left: 5rem;
+                padding-right: 5rem;
+            }
+        }
+
         /* 组件样式优化 */
         .product-card {
             @apply bg-white rounded-lg shadow-md hover:shadow-xl transition-custom p-4 border border-gray-100;
-        }
-        .product-card-placeholder {
-            @apply bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition-custom p-4 border border-gray-100 flex items-center justify-center h-full min-h-[200px] text-gray-400;
         }
         .brand-tag {
             @apply bg-white rounded-lg shadow-sm p-3 text-center hover:shadow-md hover:bg-primary/5 transition-custom border border-gray-100;
@@ -67,29 +101,11 @@
         .ecu-tag {
             @apply bg-white rounded-md p-2 text-center border border-gray-200 text-sm hover:bg-primary/5 transition-custom;
         }
-        .supplement-text {
-            @apply text-center text-gray-600 py-3 italic;
-        }
-        .image-modal {
-            @apply fixed inset-0 bg-black/95 z-50 flex items-center justify-center hidden;
-        }
-        .modal-content {
-            @apply max-w-5xl max-h-[95vh] p-2;
-        }
-        .modal-image {
-            @apply w-full h-auto max-h-[90vh] object-contain;
-        }
-        .close-btn {
-            @apply absolute top-4 right-4 text-white text-4xl hover:text-primary transition-custom z-10 cursor-pointer;
-        }
-        .qrcode-box {
-            @apply bg-white p-4 rounded-lg shadow-md text-center;
-        }
         .factory-card {
             @apply bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-custom;
         }
         .factory-img {
-            @apply w-full object-cover aspect-ratio-4-3; /* 统一图片比例，避免变形 */
+            @apply w-full object-cover aspect-ratio-4-3;
         }
         .equipment-card {
             @apply bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-custom;
@@ -97,15 +113,24 @@
         .equipment-img {
             @apply w-full h-64 object-cover;
         }
+        .qrcode-box {
+            @apply bg-white p-4 rounded-lg shadow-md text-center;
+        }
+        .image-modal {
+            @apply fixed inset-0 bg-black/95 z-50 flex items-center justify-center hidden;
+        }
+        .close-btn {
+            @apply absolute top-4 right-4 text-white text-4xl hover:text-primary transition-custom z-10 cursor-pointer;
+        }
     </style>
 </head>
 <body class="bg-light text-dark">
 
-<!-- 核心修复：导航栏 永久固定在顶部、宽度100%满屏、最高层级 -->
+<!-- 导航栏 - 保持全屏 -->
 <nav id="navbar" class="fixed top-0 left-0 w-full z-[9999] transition-custom py-4 bg-dark shadow-md">
-    <div class="container mx-auto px-4 md:px-8 flex justify-between items-center w-full">
+    <div class="wide-container flex justify-between items-center w-full">
         <a href="#" class="text-2xl font-bold text-shadow text-white flex items-center shrink-0">
-            <!-- 公司LOGO - 优化加载和显示 -->
+            <!-- 公司LOGO -->
             <img 
                 src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/7327111515224dbebc11557709f71446.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260320162540CE54F6183B0F9F0B5D53&rrcfp=dafada99&x-expires=2090219140&x-signature=SVekwt1q9CEMS9R7vJgPcAIWLdo%3D" 
                 alt="欧克汽车零部件LOGO" 
@@ -113,7 +138,7 @@
                 loading="eager">
             欧克汽车零部件
         </a>
-        <!-- 桌面端导航菜单 - 优化不换行、宽度适配 -->
+        <!-- 桌面端导航菜单 -->
         <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
             <a href="#home" class="text-white hover:text-secondary transition-custom whitespace-nowrap">首页</a>
             <a href="#about" class="text-white hover:text-secondary transition-custom whitespace-nowrap">关于我们</a>
@@ -130,7 +155,7 @@
     </div>
     <!-- 移动端菜单 -->
     <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full left-0">
-        <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <div class="wide-container py-4 flex flex-col space-y-4">
             <a href="#home" class="text-dark hover:text-primary transition-custom py-2">首页</a>
             <a href="#about" class="text-dark hover:text-primary transition-custom py-2">关于我们</a>
             <a href="#services" class="text-dark hover:text-primary transition-custom py-2">核心业务</a>
@@ -143,14 +168,14 @@
     </div>
 </nav>
 
-<!-- 首页banner -->
+<!-- 首页banner - 全屏 -->
 <section id="home" class="relative min-h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://picsum.photos/id/1071/1920/1080');">
     <div class="absolute inset-0 bg-dark/70"></div>
-    <div class="container mx-auto px-4 md:px-8 relative z-10 text-center">
+    <div class="wide-container relative z-10 text-center">
         <h1 class="text-[clamp(2rem,5vw,4rem)] font-bold text-white mb-6 leading-tight text-shadow">
             欧克汽车零部件 <span class="text-secondary">品质铸就未来</span>
         </h1>
-        <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 max-w-2xl mx-auto">
+        <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 max-w-4xl mx-auto">
             专业的汽车零部件生产企业，集研发、生产、销售、国际贸易于一体，为全球客户提供优质的汽车电子解决方案
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
@@ -163,9 +188,9 @@
     </div>
 </section>
 
-<!-- 关于我们 -->
+<!-- 关于我们 - 全屏宽容器 -->
 <section id="about" class="py-16 md:py-20 bg-light">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="wide-container">
         <div class="text-center mb-12 md:mb-16">
             <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">关于我们</h2>
             <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
@@ -173,14 +198,13 @@
         </div>
         <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-                <!-- 公司简介图片 -->
                 <img 
                     src="https://s41.ax1x.com/2026/03/21/pen00rq.png" 
                     alt="厂区" 
                     class="rounded-lg shadow-lg w-full h-auto object-cover"
                     loading="lazy">
             </div>
-            <div>
+            <div class="max-w-2xl">
                 <h3 class="text-xl font-semibold mb-4 text-primary">公司简介</h3>
                 <p class="text-gray-700 mb-6 leading-relaxed">郑州欧克汽车零部件有限公司拥有专业化技术团队，先进的检测设备，完善的生产工艺及一体化生产流程，通过汽车零部件的检测研发，为国内外客商提供优质的附加服务。</p>
                 <p class="text-gray-700 mb-6 leading-relaxed">公司集产品销售(汽油、柴油、变速箱、新能源电脑板全系(零售/批发/代发/来样定制)，生产(生产配套方案设计开发、OEM代工代料生产、电子元器件配套采购PCB制作、SMT贴片加工、DIP插件组装测试等)，研发(模块研修、解决汽车电脑模块软硬件问题、在线编程、匹配防盗数据制作、故障诊断、电脑维修精修等)、国际贸易于一体。</p>
@@ -190,9 +214,9 @@
     </div>
 </section>
 
-<!-- 核心业务 -->
+<!-- 核心业务 - 全屏宽容器 -->
 <section id="services" class="py-16 md:py-20 bg-white">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="wide-container">
         <div class="text-center mb-12 md:mb-16">
             <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">核心业务</h2>
             <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
@@ -224,9 +248,9 @@
     </div>
 </section>
 
-<!-- 工厂实景 -->
+<!-- 工厂实景 - 全屏宽容器 -->
 <section id="factory" class="py-16 md:py-20 bg-white">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="wide-container">
         <div class="text-center mb-12 md:mb-16">
             <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">工厂实景</h2>
             <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
@@ -312,9 +336,9 @@
     </div>
 </section>
 
-<!-- 生产检测设备 -->
+<!-- 生产检测设备 - 全屏宽容器 -->
 <section id="equipment" class="py-16 md:py-20 bg-light">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="wide-container">
         <div class="text-center mb-12 md:mb-16">
             <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">生产检测设备</h2>
             <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
@@ -341,9 +365,9 @@
     </div>
 </section>
 
-<!-- 适配车型 -->
+<!-- 适配车型 - 全屏宽容器 -->
 <section id="series" class="py-16 md:py-20 bg-white">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="wide-container">
         <div class="text-center mb-12 md:mb-16">
             <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">适配车型</h2>
             <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
@@ -435,15 +459,15 @@
     </div>
 </section>
 
-<!-- 产品展示 -->
+<!-- 产品展示 - 全屏宽容器 -->
 <section id="products" class="py-16 md:py-20 bg-light">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="wide-container">
         <div class="text-center mb-12 md:mb-16">
             <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">产品展示</h2>
             <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/17/peZjtfg.png" alt="产品展示1" class="w-full h-auto object-contain rounded-md" loading="lazy">
             </div>
@@ -459,7 +483,6 @@
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/17/peZjM6A.png" alt="产品展示5" class="w-full h-auto object-contain rounded-md" loading="lazy">
             </div>
-
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/18/peeMTVP.png" alt="产品展示6" class="w-full h-auto object-contain rounded-md" loading="lazy">
             </div>
@@ -493,7 +516,6 @@
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/17/peZjQOI.png" alt="产品展示16" class="w-full h-auto object-contain rounded-md" loading="lazy">
             </div>
-
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/19/pemm7xs.jpg" alt="产品展示17" class="w-full h-auto object-contain rounded-md" loading="lazy">
             </div>
@@ -512,7 +534,6 @@
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/19/pemmRqP.png" alt="产品展示22" class="w-full h-auto object-contain rounded-md" loading="lazy">
             </div>
-
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/20/peniSpt.png" alt="产品展示23" class="w-full h-auto object-contain rounded-md" loading="lazy">
             </div>
@@ -541,14 +562,14 @@
     </div>
 </section>
 
-<!-- 联系我们 -->
+<!-- 联系我们 - 全屏宽容器 -->
 <section id="contact" class="py-16 md:py-20 bg-light">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="wide-container">
         <div class="text-center mb-12 md:mb-16">
             <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">联系我们</h2>
             <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
         </div>
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
             <div class="bg-white p-8 rounded-lg shadow-md">
                 <ul class="space-y-6">
                     <li class="flex items-start">
@@ -597,7 +618,7 @@
 
 <!-- 页脚 -->
 <footer class="bg-dark text-white pt-12 pb-6">
-    <div class="container mx-auto px-4">
+    <div class="wide-container">
         <p class="text-center text-gray-400">© 2026 郑州欧克汽车零部件有限公司版权所有</p>
     </div>
 </footer>
@@ -606,12 +627,12 @@
 <div id="imageModal" class="image-modal">
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <div class="modal-content">
-        <img id="modalImage" class="modal-image" src="" alt="放大图片">
+        <img id="modalImage" class="w-full h-auto max-h-[90vh] object-contain" src="" alt="放大图片">
     </div>
 </div>
 
 <script>
-    // 导航栏滚动效果优化
+    // 导航栏滚动效果
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll',()=>{
         if(window.scrollY > 50) {
@@ -623,7 +644,7 @@
         }
     });
 
-    // 移动端菜单切换优化
+    // 移动端菜单切换
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     menuBtn.onclick = (e)=>{
