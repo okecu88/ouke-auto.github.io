@@ -21,18 +21,6 @@
                     fontFamily: {
                         sans: ['Inter','system-ui','sans-serif'],
                     },
-                    // 【核心修改2-1】放大内容容器，适配宽屏，和导航栏宽度完全统一
-                    container: {
-                        center: true,
-                        padding: '1rem',
-                        screens: {
-                            sm: '100%',
-                            md: '100%',
-                            lg: '1300px',
-                            xl: '1500px',
-                            '2xl': '1700px',
-                        }
-                    }
                 }
             }
         }
@@ -82,14 +70,15 @@
         }
     </style>
 </head>
-<!-- 【核心修改1-1】给body加顶部内边距，避免fixed导航栏遮挡内容，同时消除默认margin -->
-<body class="font-sans text-dark bg-white pt-[72px]">
+<!-- 【核心修改1】调整body顶部内边距，移除默认margin -->
+<body class="font-sans text-dark bg-white pt-[72px] m-0">
 
-<!-- 导航栏 - 【核心修改1-2】修复置顶+位移问题 -->
+<!-- 导航栏 - 保持置顶 -->
 <nav id="navbar" class="fixed w-full top-0 left-0 z-50 transition-custom py-4 bg-dark/90">
-    <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
+    <!-- 【核心修改2】导航栏内部也改为全屏宽度，移除container限制 -->
+    <div class="w-full px-4 md:px-8 flex justify-between items-center">
         <a href="#" class="text-2xl font-bold text-shadow text-white flex items-center">
-            <!-- 公司LOGO 修复加载异常 -->
+            <!-- 公司LOGO -->
             <img src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/73271115224dbebc11557709f71446.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260320162540CE54F6183B0F9F0B5D53&rrcfp=dafada99&x-expires=2090219140&x-signature=SVekwt1q9CEMS9R7vJgPcAIWLdo%3D" 
                  alt="欧克汽车零部件LOGO" 
                  class="h-8 w-auto mr-2 object-contain"
@@ -110,9 +99,9 @@
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
-    <!-- 【核心修改1-3】修复移动端菜单位置，确保在导航栏正下方，无位移 -->
+    <!-- 移动端菜单 -->
     <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full top-full left-0">
-        <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <div class="w-full px-4 py-4 flex flex-col space-y-4">
             <a href="#home" class="text-dark hover:text-primary transition-custom py-2">首页</a>
             <a href="#about" class="text-dark hover:text-primary transition-custom py-2">关于我们</a>
             <a href="#services" class="text-dark hover:text-primary transition-custom py-2">核心业务</a>
@@ -125,14 +114,14 @@
     </div>
 </nav>
 
-<!-- 首页banner -->
+<!-- 首页banner - 【核心修改3】移除container，内容全屏 -->
 <section id="home" class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://picsum.photos/id/1071/1920/1080');">
     <div class="absolute inset-0 bg-dark/70"></div>
-    <div class="container mx-auto px-4 md:px-8 relative z-10 text-center">
+    <div class="w-full px-4 md:px-8 relative z-10 text-center">
         <h1 class="text-[clamp(2.8rem,6vw,4.5rem)] font-bold text-white mb-6 leading-tight text-shadow">
             欧克汽车零部件 <span class="text-secondary">品质铸就未来</span>
         </h1>
-        <p class="text-[clamp(1.1rem,2vw,1.4rem)] text-white/90 mb-8 max-w-3xl mx-auto">
+        <p class="text-[clamp(1.1rem,2vw,1.4rem)] text-white/90 mb-8 max-w-4xl mx-auto">
             专业的汽车零部件生产企业，集研发、生产、销售、国际贸易于一体，为全球客户提供优质的汽车电子解决方案
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
@@ -145,15 +134,15 @@
     </div>
 </section>
 
-<!-- 关于我们 【核心修改2-2】放大模块内边距，提升视觉舒展度 -->
+<!-- 关于我们 - 【核心修改4】所有container替换为w-full px-4 md:px-8 -->
 <section id="about" class="py-24 bg-light">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
             <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">关于我们</h2>
             <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-3xl mx-auto text-lg">专业的汽车零部件生产企业，集研发、生产、销售、国际贸易于一体</p>
+            <p class="text-gray-600 max-w-4xl mx-auto text-lg">专业的汽车零部件生产企业，集研发、生产、销售、国际贸易于一体</p>
         </div>
-        <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="grid md:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
             <div>
                 <img src="https://s41.ax1x.com/2026/03/21/pen00rq.png" alt="厂区" class="rounded-lg shadow-lg w-full h-auto">
             </div>
@@ -169,14 +158,13 @@
 
 <!-- 核心业务 -->
 <section id="services" class="py-24 bg-white">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
             <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">核心业务</h2>
             <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-3xl mx-auto text-lg">全方位的汽车电子解决方案，覆盖研发、生产、销售全流程</p>
+            <p class="text-gray-600 max-w-4xl mx-auto text-lg">全方位的汽车电子解决方案，覆盖研发、生产、销售全流程</p>
         </div>
-        <!-- 【核心修改2-3】放大卡片尺寸，调整间距，适配宽屏 -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
             <div class="bg-light rounded-lg p-10 shadow-md hover:shadow-xl">
                 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-8">
                     <i class="fa-solid fa-store text-3xl text-primary"></i>
@@ -204,14 +192,13 @@
 
 <!-- 工厂实景 -->
 <section id="factory" class="py-24 bg-white">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
             <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">工厂实景</h2>
             <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
         </div>
 
-        <!-- 【核心修改2-4】调整网格布局，放大图片卡片 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12 max-w-7xl mx-auto">
             <div class="factory-card">
                 <img src="https://s41.ax1x.com/2026/03/21/penD7gH.png" alt="物料配套作业区" class="factory-img h-72">
                 <div class="p-6 text-center">
@@ -250,7 +237,7 @@
             </div>
         </div>
 
-        <div class="bg-white p-8 rounded-lg shadow-md">
+        <div class="bg-white p-8 rounded-lg shadow-md max-w-7xl mx-auto">
             <p class="text-gray-700 leading-relaxed mb-4 text-lg">
                 郑州欧克拥有专业的采购团队，为多家客户提供PCBA到成品装配代工代料(阻容、二三板管、集成电路、晶版、电感、接插件、PCB、塑胶、五金等)。公司与多家电子元件工厂和代理商建立有长期稳定的合作关系:具备良好的供货周期和供成本优势:减少客户在研发阶段的采购成本及采购时间，严格的供应商稽核管理体系和IQC来料检验，恒温恒湿、ESD静电防护、先进先出管理，确保供应链源流品质
             </p>
@@ -263,13 +250,13 @@
 
 <!-- 生产检测设备 -->
 <section id="equipment" class="py-24 bg-light">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
             <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">生产检测设备</h2>
             <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-3xl mx-auto text-lg">先进的生产检测设备，确保产品品质稳定可靠</p>
+            <p class="text-gray-600 max-w-4xl mx-auto text-lg">先进的生产检测设备，确保产品品质稳定可靠</p>
         </div>
-        <div class="grid md:grid-cols-2 gap-10">
+        <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <img src="https://s41.ax1x.com/2026/03/19/pemm8C4.png" class="w-full h-80 object-cover" alt="国产车防盗匹配平台">
                 <div class="p-8"><h3 class="text-2xl font-semibold">国产车防盗匹配平台</h3></div>
@@ -284,12 +271,12 @@
 
 <!-- 适配车型 -->
 <section id="series" class="py-24 bg-white">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
             <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">适配车型</h2>
             <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
         </div>
-        <div class="grid md:grid-cols-2 gap-10">
+        <div class="grid md:grid-cols-2 gap-10 max-w-7xl mx-auto">
             <div class="bg-light p-8 rounded-lg shadow-md h-full">
                 <h3 class="text-2xl font-semibold text-center mb-8 text-primary">ECU 电脑系列</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -378,14 +365,13 @@
 
 <!-- 产品展示 -->
 <section id="products" class="py-24 bg-light">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
             <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">产品展示</h2>
             <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
         </div>
 
-        <!-- 【核心修改2-5】优化产品网格，宽屏下卡片更大，修复错误图片链接 -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 max-w-[98%] mx-auto">
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/17/peZjtfg.png" alt="产品展示1" class="w-full h-auto object-contain rounded-md">
             </div>
@@ -485,7 +471,7 @@
 
 <!-- 联系我们 -->
 <section id="contact" class="py-24 bg-light">
-    <div class="container mx-auto px-4 md:px-8">
+    <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
             <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">联系我们</h2>
             <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
@@ -534,20 +520,19 @@
 </section>
 
 <footer class="bg-dark text-white pt-20 pb-10">
-    <div class="container mx-auto px-4">
+    <div class="w-full px-4">
         <p class="text-center text-gray-400 text-lg">© 2026 郑州欧克汽车零部件有限公司版权所有</p>
     </div>
 </footer>
 
 <script>
-    // 优化导航栏滚动效果，修复位移
+    // 优化导航栏滚动效果
     const navbar = document.getElementById('navbar');
     
     function updateNavbar() {
         if (window.scrollY > 50) {
             navbar.classList.add('bg-dark/95', 'shadow-lg', 'py-2');
             navbar.classList.remove('py-4');
-            // 同步body的padding-top，避免页面跳动
             document.body.style.paddingTop = '64px';
         } else {
             navbar.classList.remove('bg-dark/95', 'shadow-lg', 'py-2');
