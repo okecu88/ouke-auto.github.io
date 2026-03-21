@@ -38,15 +38,20 @@
             .scrollbar-hide::-webkit-scrollbar { display: none; }
         }
 
-        /* 基础样式优化 */
+        /* 核心修复：全局样式，解决导航栏遮挡问题 */
         html { 
             scroll-behavior: smooth; 
-            scroll-padding-top: 80px; /* 适配固定导航栏的滚动锚点 */
+            /* 修复锚点跳转被导航栏遮挡 */
+            scroll-padding-top: 80px; 
         }
+        /* 核心修复：给body加顶部内边距，正好等于导航栏高度，避免页面内容被固定导航栏盖住 */
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: #1D3557;
             background-color: #F1FAEE;
+            padding-top: 80px;
+            margin: 0;
+            overflow-x: hidden;
         }
 
         /* 组件样式优化 */
@@ -96,33 +101,35 @@
 </head>
 <body class="bg-light text-dark">
 
-<!-- 导航栏 - 优化交互和样式 -->
-<nav id="navbar" class="fixed w-full z-50 transition-custom py-4 bg-dark/95 shadow-md">
-    <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
-        <a href="#" class="text-2xl font-bold text-shadow text-white flex items-center">
+<!-- 核心修复：导航栏 永久固定在顶部、宽度100%满屏、最高层级 -->
+<nav id="navbar" class="fixed top-0 left-0 w-full z-[9999] transition-custom py-4 bg-dark shadow-md">
+    <div class="container mx-auto px-4 md:px-8 flex justify-between items-center w-full">
+        <a href="#" class="text-2xl font-bold text-shadow text-white flex items-center shrink-0">
             <!-- 公司LOGO - 优化加载和显示 -->
             <img 
                 src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/7327111515224dbebc11557709f71446.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260320162540CE54F6183B0F9F0B5D53&rrcfp=dafada99&x-expires=2090219140&x-signature=SVekwt1q9CEMS9R7vJgPcAIWLdo%3D" 
                 alt="欧克汽车零部件LOGO" 
                 class="h-8 w-auto mr-2 object-contain"
-                loading="lazy">
+                loading="eager">
             欧克汽车零部件
         </a>
-        <div class="hidden md:flex space-x-8">
-            <a href="#home" class="text-white hover:text-secondary transition-custom">首页</a>
-            <a href="#about" class="text-white hover:text-secondary transition-custom">关于我们</a>
-            <a href="#services" class="text-white hover:text-secondary transition-custom">核心业务</a>
-            <a href="#factory" class="text-white hover:text-secondary transition-custom">工厂实景</a>
-            <a href="#equipment" class="text-white hover:text-secondary transition-custom">生产设备</a>
-            <a href="#series" class="text-white hover:text-secondary transition-custom">适配车型</a>
-            <a href="#products" class="text-white hover:text-secondary transition-custom">产品展示</a>
-            <a href="#contact" class="text-white hover:text-secondary transition-custom">联系我们</a>
+        <!-- 桌面端导航菜单 - 优化不换行、宽度适配 -->
+        <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+            <a href="#home" class="text-white hover:text-secondary transition-custom whitespace-nowrap">首页</a>
+            <a href="#about" class="text-white hover:text-secondary transition-custom whitespace-nowrap">关于我们</a>
+            <a href="#services" class="text-white hover:text-secondary transition-custom whitespace-nowrap">核心业务</a>
+            <a href="#factory" class="text-white hover:text-secondary transition-custom whitespace-nowrap">工厂实景</a>
+            <a href="#equipment" class="text-white hover:text-secondary transition-custom whitespace-nowrap">生产设备</a>
+            <a href="#series" class="text-white hover:text-secondary transition-custom whitespace-nowrap">适配车型</a>
+            <a href="#products" class="text-white hover:text-secondary transition-custom whitespace-nowrap">产品展示</a>
+            <a href="#contact" class="text-white hover:text-secondary transition-custom whitespace-nowrap">联系我们</a>
         </div>
-        <button id="menuBtn" class="md:hidden text-white text-2xl">
+        <button id="menuBtn" class="md:hidden text-white text-2xl shrink-0">
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
-    <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full">
+    <!-- 移动端菜单 -->
+    <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full left-0">
         <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a href="#home" class="text-dark hover:text-primary transition-custom py-2">首页</a>
             <a href="#about" class="text-dark hover:text-primary transition-custom py-2">关于我们</a>
@@ -136,7 +143,7 @@
     </div>
 </nav>
 
-<!-- 首页banner - 优化响应式和显示 -->
+<!-- 首页banner -->
 <section id="home" class="relative min-h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://picsum.photos/id/1071/1920/1080');">
     <div class="absolute inset-0 bg-dark/70"></div>
     <div class="container mx-auto px-4 md:px-8 relative z-10 text-center">
@@ -156,7 +163,7 @@
     </div>
 </section>
 
-<!-- 关于我们 - 优化布局和图片显示 -->
+<!-- 关于我们 -->
 <section id="about" class="py-16 md:py-20 bg-light">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-12 md:mb-16">
@@ -166,7 +173,7 @@
         </div>
         <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-                <!-- 公司简介图片 - 添加懒加载和圆角 -->
+                <!-- 公司简介图片 -->
                 <img 
                     src="https://s41.ax1x.com/2026/03/21/pen00rq.png" 
                     alt="厂区" 
@@ -183,7 +190,7 @@
     </div>
 </section>
 
-<!-- 核心业务 - 优化卡片交互 -->
+<!-- 核心业务 -->
 <section id="services" class="py-16 md:py-20 bg-white">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-12 md:mb-16">
@@ -217,7 +224,7 @@
     </div>
 </section>
 
-<!-- 工厂实景 - 优化图片比例和响应式 -->
+<!-- 工厂实景 -->
 <section id="factory" class="py-16 md:py-20 bg-white">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-12 md:mb-16">
@@ -305,7 +312,7 @@
     </div>
 </section>
 
-<!-- 生产检测设备 - 优化卡片样式 -->
+<!-- 生产检测设备 -->
 <section id="equipment" class="py-16 md:py-20 bg-light">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-12 md:mb-16">
@@ -334,7 +341,7 @@
     </div>
 </section>
 
-<!-- 适配车型 - 优化标签交互和响应式 -->
+<!-- 适配车型 -->
 <section id="series" class="py-16 md:py-20 bg-white">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-12 md:mb-16">
@@ -428,7 +435,7 @@
     </div>
 </section>
 
-<!-- 产品展示 - 优化网格布局和图片加载 -->
+<!-- 产品展示 -->
 <section id="products" class="py-16 md:py-20 bg-light">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-12 md:mb-16">
@@ -437,7 +444,6 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-            <!-- 修复原代码中错误的图片链接 -->
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/17/peZjtfg.png" alt="产品展示1" class="w-full h-auto object-contain rounded-md" loading="lazy">
             </div>
@@ -535,7 +541,7 @@
     </div>
 </section>
 
-<!-- 联系我们 - 优化布局和二维码显示 -->
+<!-- 联系我们 -->
 <section id="contact" class="py-16 md:py-20 bg-light">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-12 md:mb-16">
@@ -589,14 +595,14 @@
     </div>
 </section>
 
-<!-- 页脚优化 -->
+<!-- 页脚 -->
 <footer class="bg-dark text-white pt-12 pb-6">
     <div class="container mx-auto px-4">
         <p class="text-center text-gray-400">© 2026 郑州欧克汽车零部件有限公司版权所有</p>
     </div>
 </footer>
 
-<!-- 图片放大模态框 - 新增交互功能 -->
+<!-- 图片放大模态框 -->
 <div id="imageModal" class="image-modal">
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <div class="modal-content">
@@ -609,10 +615,10 @@
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll',()=>{
         if(window.scrollY > 50) {
-            navbar.classList.add('bg-dark/95', 'shadow-lg', 'py-2');
+            navbar.classList.add('py-2', 'shadow-lg');
             navbar.classList.remove('py-4');
         } else {
-            navbar.classList.remove('bg-dark/95', 'shadow-lg', 'py-2');
+            navbar.classList.remove('py-2', 'shadow-lg');
             navbar.classList.add('py-4');
         }
     });
@@ -620,7 +626,8 @@
     // 移动端菜单切换优化
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.onclick = ()=>{
+    menuBtn.onclick = (e)=>{
+        e.stopPropagation();
         mobileMenu.classList.toggle('hidden');
         const icon = menuBtn.querySelector('i');
         if(mobileMenu.classList.contains('hidden')) {
