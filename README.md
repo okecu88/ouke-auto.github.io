@@ -21,16 +21,16 @@
                     fontFamily: {
                         sans: ['Inter','system-ui','sans-serif'],
                     },
-                    // 【关键修改】统一容器最大宽度，确保导航与内容一致
+                    // 【核心修改2-1】放大内容容器，适配宽屏，和导航栏宽度完全统一
                     container: {
                         center: true,
                         padding: '1rem',
                         screens: {
                             sm: '100%',
                             md: '100%',
-                            lg: '1200px',
-                            xl: '1400px',
-                            '2xl': '1400px',
+                            lg: '1300px',
+                            xl: '1500px',
+                            '2xl': '1700px',
                         }
                     }
                 }
@@ -82,20 +82,21 @@
         }
     </style>
 </head>
-<body class="font-sans text-dark bg-white">
+<!-- 【核心修改1-1】给body加顶部内边距，避免fixed导航栏遮挡内容，同时消除默认margin -->
+<body class="font-sans text-dark bg-white pt-[72px]">
 
-<!-- 导航栏 - 含工厂实景入口（已添加公司LOGO） -->
-<!-- 【关键修改】确保导航栏内部容器与下方内容容器配置完全一致 -->
-<nav id="navbar" class="fixed w-full z-50 transition-custom py-4 bg-dark/90">
+<!-- 导航栏 - 【核心修改1-2】修复置顶+位移问题 -->
+<nav id="navbar" class="fixed w-full top-0 left-0 z-50 transition-custom py-4 bg-dark/90">
     <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
         <a href="#" class="text-2xl font-bold text-shadow text-white flex items-center">
-            <!-- 公司LOGO -->
+            <!-- 公司LOGO 修复加载异常 -->
             <img src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/73271115224dbebc11557709f71446.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260320162540CE54F6183B0F9F0B5D53&rrcfp=dafada99&x-expires=2090219140&x-signature=SVekwt1q9CEMS9R7vJgPcAIWLdo%3D" 
                  alt="欧克汽车零部件LOGO" 
-                 class="h-8 w-auto mr-2 object-contain">
+                 class="h-8 w-auto mr-2 object-contain"
+                 onerror="this.style.display='none'">
             欧克汽车零部件
         </a>
-        <div class="hidden md:flex space-x-8">
+        <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
             <a href="#home" class="text-white hover:text-secondary transition-custom">首页</a>
             <a href="#about" class="text-white hover:text-secondary transition-custom">关于我们</a>
             <a href="#services" class="text-white hover:text-secondary transition-custom">核心业务</a>
@@ -109,7 +110,8 @@
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
-    <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full">
+    <!-- 【核心修改1-3】修复移动端菜单位置，确保在导航栏正下方，无位移 -->
+    <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full top-full left-0">
         <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a href="#home" class="text-dark hover:text-primary transition-custom py-2">首页</a>
             <a href="#about" class="text-dark hover:text-primary transition-custom py-2">关于我们</a>
@@ -127,15 +129,15 @@
 <section id="home" class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://picsum.photos/id/1071/1920/1080');">
     <div class="absolute inset-0 bg-dark/70"></div>
     <div class="container mx-auto px-4 md:px-8 relative z-10 text-center">
-        <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white mb-6 leading-tight text-shadow">
+        <h1 class="text-[clamp(2.8rem,6vw,4.5rem)] font-bold text-white mb-6 leading-tight text-shadow">
             欧克汽车零部件 <span class="text-secondary">品质铸就未来</span>
         </h1>
-        <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 max-w-2xl mx-auto">
+        <p class="text-[clamp(1.1rem,2vw,1.4rem)] text-white/90 mb-8 max-w-3xl mx-auto">
             专业的汽车零部件生产企业，集研发、生产、销售、国际贸易于一体，为全球客户提供优质的汽车电子解决方案
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#contact" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg transition-custom">立即咨询</a>
-            <a href="#products" class="bg-transparent border-2 border-white hover:border-secondary hover:text-secondary text-white font-medium py-3 px-8 rounded-lg transition-custom">查看产品</a>
+            <a href="#contact" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg transition-custom text-lg">立即咨询</a>
+            <a href="#products" class="bg-transparent border-2 border-white hover:border-secondary hover:text-secondary text-white font-medium py-3 px-8 rounded-lg transition-custom text-lg">查看产品</a>
         </div>
     </div>
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
@@ -143,121 +145,116 @@
     </div>
 </section>
 
-<!-- 关于我们 -->
-<section id="about" class="py-20 bg-light">
+<!-- 关于我们 【核心修改2-2】放大模块内边距，提升视觉舒展度 -->
+<section id="about" class="py-24 bg-light">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">关于我们</h2>
-            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-3xl mx-auto">专业的汽车零部件生产企业，集研发、生产、销售、国际贸易于一体</p>
+            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">关于我们</h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-gray-600 max-w-3xl mx-auto text-lg">专业的汽车零部件生产企业，集研发、生产、销售、国际贸易于一体</p>
         </div>
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div>
-                <!-- 公司简介图片 -->
                 <img src="https://s41.ax1x.com/2026/03/21/pen00rq.png" alt="厂区" class="rounded-lg shadow-lg w-full h-auto">
             </div>
             <div>
-                <h3 class="text-xl font-semibold mb-4 text-primary">公司简介</h3>
-                <p class="text-gray-700 mb-6 leading-relaxed">郑州欧克汽车零部件有限公司拥有专业化技术团队，先进的检测设备，完善的生产工艺及一体化生产流程，通过汽车零部件的检测研发，为国内外客商提供优质的附加服务。</p>
-                <p class="text-gray-700 mb-6 leading-relaxed">公司集产品销售(汽油、柴油、变速箱、新能源电脑板全系(零售/批发/代发/来样定制)，生产(生产配套方案设计开发、OEM代工代料生产、电子元器件配套采购PCB制作、SMT贴片加工、DIP插件组装测试等)，研发(模块研修、解决汽车电脑模块软硬件问题、在线编程、匹配防盗数据制作、故障诊断、电脑维修精修等)、国际贸易于一体。</p>
-                <a href="#contact" class="inline-block mt-4 bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition-custom">联系我们</a>
+                <h3 class="text-2xl font-semibold mb-6 text-primary">公司简介</h3>
+                <p class="text-gray-700 mb-6 leading-relaxed text-lg">郑州欧克汽车零部件有限公司拥有专业化技术团队，先进的检测设备，完善的生产工艺及一体化生产流程，通过汽车零部件的检测研发，为国内外客商提供优质的附加服务。</p>
+                <p class="text-gray-700 mb-6 leading-relaxed text-lg">公司集产品销售(汽油、柴油、变速箱、新能源电脑板全系(零售/批发/代发/来样定制)，生产(生产配套方案设计开发、OEM代工代料生产、电子元器件配套采购PCB制作、SMT贴片加工、DIP插件组装测试等)，研发(模块研修、解决汽车电脑模块软硬件问题、在线编程、匹配防盗数据制作、故障诊断、电脑维修精修等)、国际贸易于一体。</p>
+                <a href="#contact" class="inline-block mt-4 bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg transition-custom text-lg">联系我们</a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- 核心业务 -->
-<section id="services" class="py-20 bg-white">
+<section id="services" class="py-24 bg-white">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">核心业务</h2>
-            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-3xl mx-auto">全方位的汽车电子解决方案，覆盖研发、生产、销售全流程</p>
+            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">核心业务</h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-gray-600 max-w-3xl mx-auto text-lg">全方位的汽车电子解决方案，覆盖研发、生产、销售全流程</p>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-light rounded-lg p-8 shadow-md hover:shadow-xl">
-                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                    <i class="fa-solid fa-store text-2xl text-primary"></i>
+        <!-- 【核心修改2-3】放大卡片尺寸，调整间距，适配宽屏 -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="bg-light rounded-lg p-10 shadow-md hover:shadow-xl">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-8">
+                    <i class="fa-solid fa-store text-3xl text-primary"></i>
                 </div>
-                <h3 class="text-xl font-semibold mb-4">产品销售</h3>
-                <p class="text-gray-600">汽油、柴油、变速箱、新能源电脑板全系销售，支持零售、批发、代发、来样定制。</p>
+                <h3 class="text-2xl font-semibold mb-6">产品销售</h3>
+                <p class="text-gray-600 text-lg">汽油、柴油、变速箱、新能源电脑板全系销售，支持零售、批发、代发、来样定制。</p>
             </div>
-            <div class="bg-light rounded-lg p-8 shadow-md hover:shadow-xl">
-                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                    <i class="fa-solid fa-industry text-2xl text-primary"></i>
+            <div class="bg-light rounded-lg p-10 shadow-md hover:shadow-xl">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-8">
+                    <i class="fa-solid fa-industry text-3xl text-primary"></i>
                 </div>
-                <h3 class="text-xl font-semibold mb-4">生产制造</h3>
-                <p class="text-gray-600">OEM代工、SMT贴片、插件测试、电子元器件配套生产。</p>
+                <h3 class="text-2xl font-semibold mb-6">生产制造</h3>
+                <p class="text-gray-600 text-lg">OEM代工、SMT贴片、插件测试、电子元器件配套生产。</p>
             </div>
-            <div class="bg-light rounded-lg p-8 shadow-md hover:shadow-xl">
-                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                    <i class="fa-solid fa-flask-vial text-2xl text-primary"></i>
+            <div class="bg-light rounded-lg p-10 shadow-md hover:shadow-xl">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-8">
+                    <i class="fa-solid fa-flask-vial text-3xl text-primary"></i>
                 </div>
-                <h3 class="text-xl font-semibold mb-4">研发维修</h3>
-                <p class="text-gray-600">模块维修、在线编程、防盗匹配、故障诊断、数据制作。</p>
+                <h3 class="text-2xl font-semibold mb-6">研发维修</h3>
+                <p class="text-gray-600 text-lg">模块维修、在线编程、防盗匹配、故障诊断、数据制作。</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- 工厂实景 -->
-<section id="factory" class="py-20 bg-white">
+<section id="factory" class="py-24 bg-white">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">工厂实景</h2>
-            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">工厂实景</h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <!-- 1 物料配套作业区 -->
+        <!-- 【核心修改2-4】调整网格布局，放大图片卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
             <div class="factory-card">
-                <img src="https://s41.ax1x.com/2026/03/21/penD7gH.png" alt="物料配套作业区" class="factory-img">
-                <div class="p-4 text-center">
-                    <h3 class="text-lg font-semibold">物料配套作业区</h3>
+                <img src="https://s41.ax1x.com/2026/03/21/penD7gH.png" alt="物料配套作业区" class="factory-img h-72">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">物料配套作业区</h3>
                 </div>
             </div>
-            <!-- 2 SMT车间 -->
             <div class="factory-card">
-                <img src="https://s41.ax1x.com/2026/03/21/penDHvd.png" alt="SMT车间" class="factory-img">
-                <div class="p-4 text-center">
-                    <h3 class="text-lg font-semibold">SMT车间</h3>
+                <img src="https://s41.ax1x.com/2026/03/21/penDHvd.png" alt="SMT车间" class="factory-img h-72">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">SMT车间</h3>
                 </div>
             </div>
-            <!-- 3 AIO车间 -->
             <div class="factory-card">
-                <img src="https://s41.ax1x.com/2026/03/21/penDObt.png" alt="AIO车间" class="factory-img">
-                <div class="p-4 text-center">
-                    <h3 class="text-lg font-semibold">AIO车间</h3>
+                <img src="https://s41.ax1x.com/2026/03/21/penDObt.png" alt="AIO车间" class="factory-img h-72">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">AIO车间</h3>
                 </div>
             </div>
-            <!-- 4 三防车间 -->
             <div class="factory-card">
-                <img src="https://s41.ax1x.com/2026/03/21/penDjVP.jpg" alt="三防车间" class="factory-img">
-                <div class="p-4 text-center">
-                    <h3 class="text-lg font-semibold">三防车间</h3>
+                <img src="https://s41.ax1x.com/2026/03/21/penDjVP.jpg" alt="三防车间" class="factory-img h-72">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">三防车间</h3>
                 </div>
             </div>
-            <!-- 5 装配车间 -->
             <div class="factory-card">
-                <img src="https://s41.ax1x.com/2026/03/21/penDvUf.jpg" alt="装配车间" class="factory-img">
-                <div class="p-4 text-center">
-                    <h3 class="text-lg font-semibold">装配车间</h3>
+                <img src="https://s41.ax1x.com/2026/03/21/penDvUf.jpg" alt="装配车间" class="factory-img h-72">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">装配车间</h3>
                 </div>
             </div>
-            <!-- 6 功能测试 -->
             <div class="factory-card">
-                <img src="https://s41.ax1x.com/2026/03/21/penDx58.png" alt="功能测试" class="factory-img">
-                <div class="p-4 text-center">
-                    <h3 class="text-lg font-semibold">功能测试</h3>
+                <img src="https://s41.ax1x.com/2026/03/21/penDx58.png" alt="功能测试" class="factory-img h-72">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold">功能测试</h3>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <p class="text-gray-700 leading-relaxed mb-4">
+        <div class="bg-white p-8 rounded-lg shadow-md">
+            <p class="text-gray-700 leading-relaxed mb-4 text-lg">
                 郑州欧克拥有专业的采购团队，为多家客户提供PCBA到成品装配代工代料(阻容、二三板管、集成电路、晶版、电感、接插件、PCB、塑胶、五金等)。公司与多家电子元件工厂和代理商建立有长期稳定的合作关系:具备良好的供货周期和供成本优势:减少客户在研发阶段的采购成本及采购时间，严格的供应商稽核管理体系和IQC来料检验，恒温恒湿、ESD静电防护、先进先出管理，确保供应链源流品质
             </p>
-            <p class="text-gray-600 text-sm leading-relaxed italic">
+            <p class="text-gray-600 text-base leading-relaxed italic">
                 Zhengzhou Ouke has a professional purchasing team, providing PCBA to finished product assembly OEM and component sourcing services (resistors, capacitors, diodes, triodes, integrated circuits, crystal oscillators, inductors, connectors, PCBs, plastics, hardware, etc.) for multiple customers. The company has established long-term and stable cooperative relationships with many electronic component factories and agents: it has advantages in good delivery cycles and supply costs; reduces customers' purchasing costs and time during the R&D stage; implements strict supplier audit management systems and IQC incoming inspection, constant temperature and humidity, ESD electrostatic protection, and FIFO management to ensure the quality of the supply chain from the source.
             </p>
         </div>
@@ -265,114 +262,114 @@
 </section>
 
 <!-- 生产检测设备 -->
-<section id="equipment" class="py-20 bg-light">
+<section id="equipment" class="py-24 bg-light">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">生产检测设备</h2>
-            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-3xl mx-auto">先进的生产检测设备，确保产品品质稳定可靠</p>
+            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">生产检测设备</h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-gray-600 max-w-3xl mx-auto text-lg">先进的生产检测设备，确保产品品质稳定可靠</p>
         </div>
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid md:grid-cols-2 gap-10">
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="https://s41.ax1x.com/2026/03/19/pemm8C4.png" class="w-full h-64 object-cover" alt="国产车防盗匹配平台">
-                <div class="p-6"><h3 class="text-xl font-semibold">国产车防盗匹配平台</h3></div>
+                <img src="https://s41.ax1x.com/2026/03/19/pemm8C4.png" class="w-full h-80 object-cover" alt="国产车防盗匹配平台">
+                <div class="p-8"><h3 class="text-2xl font-semibold">国产车防盗匹配平台</h3></div>
             </div>
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="https://s41.ax1x.com/2026/03/19/pemmG8J.png" class="w-full h-64 object-cover" alt="ECU综合测试平台">
-                <div class="p-6"><h3 class="text-xl font-semibold">ECU综合测试平台</h3></div>
+                <img src="https://s41.ax1x.com/2026/03/19/pemmG8J.png" class="w-full h-80 object-cover" alt="ECU综合测试平台">
+                <div class="p-8"><h3 class="text-2xl font-semibold">ECU综合测试平台</h3></div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- 适配车型 -->
-<section id="series" class="py-20 bg-white">
+<section id="series" class="py-24 bg-white">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">适配车型</h2>
-            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">适配车型</h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
         </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-light p-6 rounded-lg shadow-md h-full">
-                <h3 class="text-xl font-semibold text-center mb-4 text-primary">ECU 电脑系列</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <div class="ecu-tag">M7</div>
-                    <div class="ecu-tag">M797</div>
-                    <div class="ecu-tag">ME7</div>
-                    <div class="ecu-tag">ME17</div>
-                    <div class="ecu-tag">ECU6.1</div>
-                    <div class="ecu-tag">MG1UA008</div>
-                    <div class="ecu-tag">MG1US00/S028</div>
-                    <div class="ecu-tag">MG1US708</div>
-                    <div class="ecu-tag">MG1US018</div>
-                    <div class="ecu-tag">MED17</div>
-                    <div class="ecu-tag">ME7.4.4/ME7.4.5</div>
-                    <div class="ecu-tag">Cruze</div>
-                    <div class="ecu-tag">Continental</div>
-                    <div class="ecu-tag">MED17.5.25</div>
-                    <div class="ecu-tag">EDC16C39</div>
-                    <div class="ecu-tag">EDC17C53</div>
-                    <div class="ecu-tag">EDC17C55</div>
-                    <div class="ecu-tag">EDC17C63</div>
-                    <div class="ecu-tag">EDC17C81</div>
-                    <div class="ecu-tag">EDC17C04</div>
-                    <div class="ecu-tag">ME17.9.11</div>
-                    <div class="ecu-tag">ME17.9.11.1</div>
-                    <div class="ecu-tag">ME17.9.21.1</div>
-                    <div class="ecu-tag">ME17.9.5</div>
-                    <div class="ecu-tag">M7.9.8</div>
-                    <div class="ecu-tag">MG7.9.8</div>
-                    <div class="ecu-tag">ME17.9.8</div>
-                    <div class="ecu-tag">MED17.9.8</div>
-                    <div class="ecu-tag">MEG17.9.8</div>
-                    <div class="ecu-tag">MEG17.9.12/9.12.1</div>
-                    <div class="ecu-tag">MEG17.9.13</div>
-                    <div class="ecu-tag">MEG17.9.21</div>
-                    <div class="ecu-tag">MT20/20U/20U2/22U</div>
-                    <div class="ecu-tag">MT22.1</div>
-                    <div class="ecu-tag">MT22.3</div>
-                    <div class="ecu-tag">MT60.1</div>
-                    <div class="ecu-tag">MT60</div>
-                    <div class="ecu-tag">MT62.1/62.1U</div>
-                    <div class="ecu-tag">MT62.3</div>
-                    <div class="ecu-tag">MT80</div>
-                    <div class="ecu-tag">MT92</div>
-                    <div class="ecu-tag">MT34</div>
-                    <div class="ecu-tag">MTO5</div>
-                    <div class="ecu-tag">等系列</div>
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="bg-light p-8 rounded-lg shadow-md h-full">
+                <h3 class="text-2xl font-semibold text-center mb-8 text-primary">ECU 电脑系列</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <div class="ecu-tag text-base py-3">M7</div>
+                    <div class="ecu-tag text-base py-3">M797</div>
+                    <div class="ecu-tag text-base py-3">ME7</div>
+                    <div class="ecu-tag text-base py-3">ME17</div>
+                    <div class="ecu-tag text-base py-3">ECU6.1</div>
+                    <div class="ecu-tag text-base py-3">MG1UA008</div>
+                    <div class="ecu-tag text-base py-3">MG1US00/S028</div>
+                    <div class="ecu-tag text-base py-3">MG1US708</div>
+                    <div class="ecu-tag text-base py-3">MG1US018</div>
+                    <div class="ecu-tag text-base py-3">MED17</div>
+                    <div class="ecu-tag text-base py-3">ME7.4.4/ME7.4.5</div>
+                    <div class="ecu-tag text-base py-3">Cruze</div>
+                    <div class="ecu-tag text-base py-3">Continental</div>
+                    <div class="ecu-tag text-base py-3">MED17.5.25</div>
+                    <div class="ecu-tag text-base py-3">EDC16C39</div>
+                    <div class="ecu-tag text-base py-3">EDC17C53</div>
+                    <div class="ecu-tag text-base py-3">EDC17C55</div>
+                    <div class="ecu-tag text-base py-3">EDC17C63</div>
+                    <div class="ecu-tag text-base py-3">EDC17C81</div>
+                    <div class="ecu-tag text-base py-3">EDC17C04</div>
+                    <div class="ecu-tag text-base py-3">ME17.9.11</div>
+                    <div class="ecu-tag text-base py-3">ME17.9.11.1</div>
+                    <div class="ecu-tag text-base py-3">ME17.9.21.1</div>
+                    <div class="ecu-tag text-base py-3">ME17.9.5</div>
+                    <div class="ecu-tag text-base py-3">M7.9.8</div>
+                    <div class="ecu-tag text-base py-3">MG7.9.8</div>
+                    <div class="ecu-tag text-base py-3">ME17.9.8</div>
+                    <div class="ecu-tag text-base py-3">MED17.9.8</div>
+                    <div class="ecu-tag text-base py-3">MEG17.9.8</div>
+                    <div class="ecu-tag text-base py-3">MEG17.9.12/9.12.1</div>
+                    <div class="ecu-tag text-base py-3">MEG17.9.13</div>
+                    <div class="ecu-tag text-base py-3">MEG17.9.21</div>
+                    <div class="ecu-tag text-base py-3">MT20/20U/20U2/22U</div>
+                    <div class="ecu-tag text-base py-3">MT22.1</div>
+                    <div class="ecu-tag text-base py-3">MT22.3</div>
+                    <div class="ecu-tag text-base py-3">MT60.1</div>
+                    <div class="ecu-tag text-base py-3">MT60</div>
+                    <div class="ecu-tag text-base py-3">MT62.1/62.1U</div>
+                    <div class="ecu-tag text-base py-3">MT62.3</div>
+                    <div class="ecu-tag text-base py-3">MT80</div>
+                    <div class="ecu-tag text-base py-3">MT92</div>
+                    <div class="ecu-tag text-base py-3">MT34</div>
+                    <div class="ecu-tag text-base py-3">MTO5</div>
+                    <div class="ecu-tag text-base py-3">等系列</div>
                 </div>
             </div>
 
-            <div class="bg-light p-6 rounded-lg shadow-md h-full">
-                <h3 class="text-xl font-semibold text-center mb-4 text-primary">Vehicle Brand</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <div class="brand-tag">奔驰/Mercedes-E</div>
-                    <div class="brand-tag">宝马/BWM</div>
-                    <div class="brand-tag">奥迪/audi</div>
-                    <div class="brand-tag">长安/ChangAn</div>
-                    <div class="brand-tag">长城/GWM</div>
-                    <div class="brand-tag">五菱/WuLing</div>
-                    <div class="brand-tag">北汽/BAIC</div>
-                    <div class="brand-tag">东风/DFM</div>
-                    <div class="brand-tag">众泰/ZOTYE</div>
-                    <div class="brand-tag">比亚迪/BYD</div>
-                    <div class="brand-tag">吉利/Geely</div>
-                    <div class="brand-tag">奇瑞/CHERY</div>
-                    <div class="brand-tag">金杯/JinBei</div>
-                    <div class="brand-tag">江淮/JAC</div>
-                    <div class="brand-tag">力帆/LIFAN</div>
-                    <div class="brand-tag">陆风/Landwind</div>
-                    <div class="brand-tag">上汽/SAIC</div>
-                    <div class="brand-tag">广汽/GAC</div>
-                    <div class="brand-tag">一汽/FAW</div>
-                    <div class="brand-tag">英朗/Excelle</div>
-                    <div class="brand-tag">现代/HYUNDAI</div>
-                    <div class="brand-tag">福迪/FODAY</div>
-                    <div class="brand-tag">福田/Foton</div>
-                    <div class="brand-tag">庆铃/Qingling</div>
-                    <div class="brand-tag">黄海/Hanghai</div>
-                    <div class="brand-tag">江铃/JMC</div>
-                    <div class="brand-tag">等车型</div>
+            <div class="bg-light p-8 rounded-lg shadow-md h-full">
+                <h3 class="text-2xl font-semibold text-center mb-8 text-primary">Vehicle Brand</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <div class="brand-tag text-base py-4">奔驰/Mercedes-E</div>
+                    <div class="brand-tag text-base py-4">宝马/BWM</div>
+                    <div class="brand-tag text-base py-4">奥迪/audi</div>
+                    <div class="brand-tag text-base py-4">长安/ChangAn</div>
+                    <div class="brand-tag text-base py-4">长城/GWM</div>
+                    <div class="brand-tag text-base py-4">五菱/WuLing</div>
+                    <div class="brand-tag text-base py-4">北汽/BAIC</div>
+                    <div class="brand-tag text-base py-4">东风/DFM</div>
+                    <div class="brand-tag text-base py-4">众泰/ZOTYE</div>
+                    <div class="brand-tag text-base py-4">比亚迪/BYD</div>
+                    <div class="brand-tag text-base py-4">吉利/Geely</div>
+                    <div class="brand-tag text-base py-4">奇瑞/CHERY</div>
+                    <div class="brand-tag text-base py-4">金杯/JinBei</div>
+                    <div class="brand-tag text-base py-4">江淮/JAC</div>
+                    <div class="brand-tag text-base py-4">力帆/LIFAN</div>
+                    <div class="brand-tag text-base py-4">陆风/Landwind</div>
+                    <div class="brand-tag text-base py-4">上汽/SAIC</div>
+                    <div class="brand-tag text-base py-4">广汽/GAC</div>
+                    <div class="brand-tag text-base py-4">一汽/FAW</div>
+                    <div class="brand-tag text-base py-4">英朗/Excelle</div>
+                    <div class="brand-tag text-base py-4">现代/HYUNDAI</div>
+                    <div class="brand-tag text-base py-4">福迪/FODAY</div>
+                    <div class="brand-tag text-base py-4">福田/Foton</div>
+                    <div class="brand-tag text-base py-4">庆铃/Qingling</div>
+                    <div class="brand-tag text-base py-4">黄海/Hanghai</div>
+                    <div class="brand-tag text-base py-4">江铃/JMC</div>
+                    <div class="brand-tag text-base py-4">等车型</div>
                 </div>
             </div>
         </div>
@@ -380,14 +377,15 @@
 </section>
 
 <!-- 产品展示 -->
-<section id="products" class="py-20 bg-light">
+<section id="products" class="py-24 bg-light">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">产品展示</h2>
-            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">产品展示</h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <!-- 【核心修改2-5】优化产品网格，宽屏下卡片更大，修复错误图片链接 -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             <div class="product-card">
                 <img src="https://s41.ax1x.com/2026/03/17/peZjtfg.png" alt="产品展示1" class="w-full h-auto object-contain rounded-md">
             </div>
@@ -486,81 +484,80 @@
 </section>
 
 <!-- 联系我们 -->
-<section id="contact" class="py-20 bg-light">
+<section id="contact" class="py-24 bg-light">
     <div class="container mx-auto px-4 md:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">联系我们</h2>
-            <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">联系我们</h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
         </div>
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-            <div class="bg-white p-8 rounded-lg shadow-md">
-                <ul class="space-y-6">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
+            <div class="bg-white p-10 rounded-lg shadow-md">
+                <ul class="space-y-8">
                     <li class="flex items-start">
-                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                            <i class="fa-solid fa-map-marker text-primary"></i>
+                        <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-6">
+                            <i class="fa-solid fa-map-marker text-2xl text-primary"></i>
                         </div>
                         <div>
-                            <h4 class="font-medium">公司地址</h4>
-                            <p class="text-gray-600">河南省郑州市管城回族区经济技术开发区第二十三大街中科智谷产业园2号楼</p>
+                            <h4 class="font-medium text-xl mb-2">公司地址</h4>
+                            <p class="text-gray-600 text-lg">河南省郑州市管城回族区经济技术开发区第二十三大街中科智谷产业园2号楼</p>
                         </div>
                     </li>
                     <li class="flex items-start">
-                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                            <i class="fa-solid fa-phone text-primary"></i>
+                        <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-6">
+                            <i class="fa-solid fa-phone text-2xl text-primary"></i>
                         </div>
                         <div>
-                            <h4 class="font-medium">联系电话</h4>
-                            <p class="text-gray-600">19128796896 / 19120698329</p>
+                            <h4 class="font-medium text-xl mb-2">联系电话</h4>
+                            <p class="text-gray-600 text-lg">19128796896 / 19120698329</p>
                         </div>
                     </li>
                     <li class="flex items-start">
-                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                            <i class="fa-brands fa-weixin text-primary"></i>
+                        <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-6">
+                            <i class="fa-brands fa-weixin text-2xl text-primary"></i>
                         </div>
                         <div>
-                            <h4 class="font-medium">微信咨询</h4>
-                            <p class="text-gray-600">19128796896（微信同号）</p>
-                            <p class="text-gray-600 mt-1">扫码添加，支持产品咨询/报价/定制</p>
+                            <h4 class="font-medium text-xl mb-2">微信咨询</h4>
+                            <p class="text-gray-600 text-lg">19128796896（微信同号）</p>
+                            <p class="text-gray-600 mt-2 text-base">扫码添加，支持产品咨询/报价/定制</p>
                         </div>
                     </li>
                 </ul>
             </div>
             
-            <div class="qrcode-box flex flex-col items-center justify-center">
-                <h3 class="text-lg font-semibold mb-4">微信扫码咨询</h3>
-                <!-- 已更换为新的微信二维码 -->
-                <img src="https://s41.ax1x.com/2026/03/21/penrnGF.png" alt="微信二维码" class="w-60 h-60 rounded-lg shadow-sm">
-                <p class="mt-3 text-gray-600">批发/维修/定制/报价 一站式服务</p>
+            <div class="qrcode-box flex flex-col items-center justify-center p-10">
+                <h3 class="text-2xl font-semibold mb-6">微信扫码咨询</h3>
+                <img src="https://s41.ax1x.com/2026/03/21/penrnGF.png" alt="微信二维码" class="w-72 h-72 rounded-lg shadow-sm">
+                <p class="mt-4 text-gray-600 text-lg">批发/维修/定制/报价 一站式服务</p>
             </div>
         </div>
     </div>
 </section>
 
-<footer class="bg-dark text-white pt-16 pb-8">
+<footer class="bg-dark text-white pt-20 pb-10">
     <div class="container mx-auto px-4">
-        <p class="text-center text-gray-400">© 2026 郑州欧克汽车零部件有限公司版权所有</p>
+        <p class="text-center text-gray-400 text-lg">© 2026 郑州欧克汽车零部件有限公司版权所有</p>
     </div>
 </footer>
 
 <script>
-    // 【关键修改】优化导航栏滚动效果
+    // 优化导航栏滚动效果，修复位移
     const navbar = document.getElementById('navbar');
     
-    // 初始化导航栏状态
     function updateNavbar() {
         if (window.scrollY > 50) {
             navbar.classList.add('bg-dark/95', 'shadow-lg', 'py-2');
             navbar.classList.remove('py-4');
+            // 同步body的padding-top，避免页面跳动
+            document.body.style.paddingTop = '64px';
         } else {
             navbar.classList.remove('bg-dark/95', 'shadow-lg', 'py-2');
             navbar.classList.add('py-4');
+            document.body.style.paddingTop = '72px';
         }
     }
 
-    // 页面加载时先执行一次
+    // 页面加载初始化
     updateNavbar();
-    
-    // 监听滚动事件
     window.addEventListener('scroll', updateNavbar);
 
     // 移动端菜单切换
@@ -572,6 +569,15 @@
         i.classList.toggle('fa-bars');
         i.classList.toggle('fa-times');
     };
+
+    // 点击移动端菜单链接后自动关闭菜单
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuBtn.querySelector('i').classList.add('fa-bars');
+            menuBtn.querySelector('i').classList.remove('fa-times');
+        });
+    });
 </script>
 </body>
 </html>
