@@ -43,6 +43,12 @@
         .product-card {
             @apply bg-white rounded-lg shadow-md hover:shadow-xl transition-custom p-4 border border-gray-100;
         }
+        .equipment-card {
+            @apply bg-white rounded-lg shadow-md hover:shadow-xl transition-custom overflow-hidden border border-gray-100;
+        }
+        .equipment-img-placeholder {
+            @apply w-full h-56 bg-gray-100 flex items-center justify-center text-gray-400;
+        }
         .brand-tag {
             @apply bg-white rounded-lg shadow-sm p-3 text-center hover:shadow-md hover:bg-primary/5 transition-custom border border-gray-100;
         }
@@ -59,7 +65,7 @@
 </head>
 <body class="font-sans text-dark bg-white">
 
-<!-- 导航栏 - 彻底固定置顶，100%全屏无位移 -->
+<!-- 导航栏 -->
 <nav id="navbar" class="fixed top-0 left-0 w-full z-[9999] transition-custom py-4 bg-dark/90">
     <div class="w-full px-4 md:px-8 flex justify-between items-center">
         <a href="#" class="text-2xl font-bold text-shadow text-white flex items-center">
@@ -69,12 +75,13 @@
                  onerror="this.style.display='none'">
             欧克汽车零部件
         </a>
-        <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+        <div class="hidden md:flex space-x-5 lg:space-x-7 items-center">
             <a href="#home" class="text-white hover:text-secondary transition-custom">首页</a>
             <a href="#about" class="text-white hover:text-secondary transition-custom">关于我们</a>
             <a href="#services" class="text-white hover:text-secondary transition-custom">核心业务</a>
+            <a href="#factory-equipment" class="text-white hover:text-secondary transition-custom">工厂设备</a>
             <a href="#factory" class="text-white hover:text-secondary transition-custom">工厂实景</a>
-            <a href="#equipment" class="text-white hover:text-secondary transition-custom">生产设备</a>
+            <a href="#equipment" class="text-white hover:text-secondary transition-custom">自研设备</a>
             <a href="#series" class="text-white hover:text-secondary transition-custom">适配车型</a>
             <a href="#products" class="text-white hover:text-secondary transition-custom">产品展示</a>
             <a href="#contact" class="text-white hover:text-secondary transition-custom">联系我们</a>
@@ -83,14 +90,15 @@
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
-    <!-- 移动端菜单 绝对定位无位移 -->
+    <!-- 移动端菜单 -->
     <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full top-full left-0">
         <div class="w-full px-4 py-4 flex flex-col space-y-4">
             <a href="#home" class="text-dark hover:text-primary transition-custom py-2">首页</a>
             <a href="#about" class="text-dark hover:text-primary transition-custom py-2">关于我们</a>
             <a href="#services" class="text-dark hover:text-primary transition-custom py-2">核心业务</a>
+            <a href="#factory-equipment" class="text-dark hover:text-primary transition-custom py-2">工厂设备</a>
             <a href="#factory" class="text-dark hover:text-primary transition-custom py-2">工厂实景</a>
-            <a href="#equipment" class="text-dark hover:text-primary transition-custom py-2">生产设备</a>
+            <a href="#equipment" class="text-dark hover:text-primary transition-custom py-2">自研设备</a>
             <a href="#series" class="text-dark hover:text-primary transition-custom py-2">适配车型</a>
             <a href="#products" class="text-dark hover:text-primary transition-custom py-2">产品展示</a>
             <a href="#contact" class="text-dark hover:text-primary transition-custom py-2">联系我们</a>
@@ -98,7 +106,7 @@
     </div>
 </nav>
 
-<!-- 首页banner - 100%全屏铺满，无任何左右留白 -->
+<!-- 首页banner -->
 <section id="home" class="w-screen h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://picsum.photos/id/1071/1920/1080');">
     <div class="absolute inset-0 bg-dark/70"></div>
     <div class="w-full px-4 relative z-10 text-center">
@@ -118,7 +126,7 @@
     </div>
 </section>
 
-<!-- 关于我们 - 背景全屏铺满，内容居中保证可读性 -->
+<!-- 关于我们 -->
 <section id="about" class="w-screen py-24 bg-light">
     <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
@@ -132,15 +140,25 @@
             </div>
             <div>
                 <h3 class="text-2xl font-semibold mb-6 text-primary">公司简介</h3>
-                <p class="text-gray-700 mb-6 leading-relaxed text-lg">郑州欧克汽车零部件有限公司拥有专业化技术团队，先进的检测设备，完善的生产工艺及一体化生产流程，通过汽车零部件的检测研发，为国内外客商提供优质的附加服务。</p>
-                <p class="text-gray-700 mb-6 leading-relaxed text-lg">公司集产品销售(汽油、柴油、变速箱、新能源电脑板全系(零售/批发/代发/来样定制)，生产(生产配套方案设计开发、OEM代工代料生产、电子元器件配套采购PCB制作、SMT贴片加工、DIP插件组装测试等)，研发(模块研修、解决汽车电脑模块软硬件问题、在线编程、匹配防盗数据制作、故障诊断、电脑维修精修等)、国际贸易于一体。</p>
+                <p class="text-gray-700 mb-6 leading-relaxed text-lg">
+                    公司拥有专业化技术团队，先进的检测设备，完善的生产工艺，通过汽车零部件的检测研发，展览展示，产业基地，为国内外客商提供优质的附加服务。
+                </p>
+                <p class="text-gray-700 mb-6 leading-relaxed text-lg">
+                    并利用丰富的行业资源及影响力，开展产品，技术，市场和项目的咨询服务，公司凭借准确的市场定位和人性化管理，积累了丰富的生产管理和经营管理的经验，已发展成为集生产、研发、销售、国际贸易于一体的专业的汽车零部件生产企业。
+                </p>
+                <p class="text-gray-600 text-base leading-relaxed italic mb-6">
+                    The company has a professional technical team, advanced testing equipment, and a complete production process. Through the testing and R&D of auto parts, exhibition and display, and industrial base, we provide high-quality value-added services for domestic and foreign customers.
+                </p>
+                <p class="text-gray-600 text-base leading-relaxed italic mb-6">
+                    Leveraging abundant industry resources and influence, we provide consulting services covering products, technology, market and projects. With accurate market positioning and humanized management, the company has accumulated rich experience in production management and operation management, and has developed into a professional auto parts manufacturer integrating production, R&D, sales and international trade.
+                </p>
                 <a href="#contact" class="inline-block mt-4 bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg transition-custom text-lg">联系我们</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 核心业务 - 背景全屏铺满 -->
+<!-- 核心业务 -->
 <section id="services" class="w-screen py-24 bg-white">
     <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
@@ -149,32 +167,169 @@
             <p class="text-gray-600 max-w-4xl mx-auto text-lg">全方位的汽车电子解决方案，覆盖研发、生产、销售全流程</p>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+            <!-- 产品销售 -->
             <div class="bg-light rounded-lg p-10 shadow-md hover:shadow-xl">
                 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-8">
                     <i class="fa-solid fa-store text-3xl text-primary"></i>
                 </div>
                 <h3 class="text-2xl font-semibold mb-6">产品销售</h3>
-                <p class="text-gray-600 text-lg">汽油、柴油、变速箱、新能源电脑板全系销售，支持零售、批发、代发、来样定制。</p>
+                <p class="text-gray-700 text-lg mb-4">汽油、柴油、变速箱、新能源电脑板全系销售，支持零售、批发、代发、来样定制。</p>
+                <p class="text-gray-600 text-base leading-relaxed italic">
+                    Full-range sales of gasoline, diesel, gearbox and new energy vehicle ECU boards, supporting retail, wholesale, drop shipping and sample customization.
+                </p>
             </div>
+            <!-- 生产制造 -->
             <div class="bg-light rounded-lg p-10 shadow-md hover:shadow-xl">
                 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-8">
                     <i class="fa-solid fa-industry text-3xl text-primary"></i>
                 </div>
                 <h3 class="text-2xl font-semibold mb-6">生产制造</h3>
-                <p class="text-gray-600 text-lg">OEM代工、SMT贴片、插件测试、电子元器件配套生产。</p>
+                <p class="text-gray-700 text-lg mb-4">OEM代工、SMT贴片、插件测试、电子元器件配套生产。</p>
+                <p class="text-gray-600 text-base leading-relaxed italic">
+                    OEM contract manufacturing, SMT mounting, component insertion and testing, as well as supporting production of electronic components.
+                </p>
             </div>
+            <!-- 研发维修 -->
             <div class="bg-light rounded-lg p-10 shadow-md hover:shadow-xl">
                 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-8">
                     <i class="fa-solid fa-flask-vial text-3xl text-primary"></i>
                 </div>
                 <h3 class="text-2xl font-semibold mb-6">研发维修</h3>
-                <p class="text-gray-600 text-lg">模块维修、在线编程、防盗匹配、故障诊断、数据制作。</p>
+                <p class="text-gray-700 text-lg mb-4">模块维修、在线编程、防盗匹配、故障诊断、数据制作。</p>
+                <p class="text-gray-600 text-base leading-relaxed italic">
+                    Module maintenance, online programming, anti-theft matching, fault diagnosis and data programming services.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 工厂实景 - 全屏铺满 -->
+<!-- 工厂设备模块 -->
+<section id="factory-equipment" class="w-screen py-24 bg-light">
+    <div class="w-full px-4 md:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">工厂设备</h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-gray-600 max-w-4xl mx-auto text-lg">全流程自动化生产设备，保障产品微米级精度与稳定品质</p>
+        </div>
+
+        <!-- 10台设备卡片网格 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-[98%] mx-auto mb-16">
+            <!-- 自动上板机 -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-upload text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="自动上板机" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">自动上板机</h3>
+                </div>
+            </div>
+            <!-- 印刷机 -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-print text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="印刷机" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">印刷机</h3>
+                </div>
+            </div>
+            <!-- 贴片机 -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-microchip text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="贴片机" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">贴片机</h3>
+                </div>
+            </div>
+            <!-- SPI -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-magnifying-glass-chart text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="SPI" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">SPI</h3>
+                </div>
+            </div>
+            <!-- 回流焊 -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-temperature-high text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="回流焊" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">回流焊</h3>
+                </div>
+            </div>
+            <!-- X-RAY -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-x-ray text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="X-RAY" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">X-RAY</h3>
+                </div>
+            </div>
+            <!-- 点胶机 -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-syringe text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="点胶机" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">点胶机</h3>
+                </div>
+            </div>
+            <!-- AIO -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-robot text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="AIO" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">AIO</h3>
+                </div>
+            </div>
+            <!-- BGA焊台 -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-screwdriver-wrench text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="BGA焊台" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">BGA焊台</h3>
+                </div>
+            </div>
+            <!-- 恒温烤箱 -->
+            <div class="equipment-card">
+                <div class="equipment-img-placeholder">
+                    <i class="fa-solid fa-temperature-half text-4xl"></i>
+                    <!-- 后续替换为实际图片：<img src="设备图片地址" alt="恒温烤箱" class="w-full h-full object-cover"> -->
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold">恒温烤箱</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部中英文说明文字 -->
+        <div class="bg-white p-8 rounded-lg shadow-md max-w-7xl mx-auto">
+            <p class="text-gray-700 leading-relaxed mb-4 text-lg">
+                高品质专业PCB打样，高精度SMT加工，实现微米级精准控制，定制生产一站式服务，提供一站式自动化ECU电子控制单元配套服务,从设计到生产直供，自动化加工生产线，融合先进技术与精细管理打造卓越品质产品。
+            </p>
+            <p class="text-gray-600 text-base leading-relaxed italic">
+                High-quality professional PCB prototyping and high-precision SMT processing with micron-level precision control. We provide one-stop customized production services, as well as full-cycle automated supporting services for ECU (Electronic Control Unit), from design to direct production supply. With automated processing production lines, we integrate advanced technology and refined management to create products with superior quality.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- 工厂实景 -->
 <section id="factory" class="w-screen py-24 bg-white">
     <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
@@ -226,19 +381,19 @@
                 郑州欧克拥有专业的采购团队，为多家客户提供PCBA到成品装配代工代料(阻容、二三板管、集成电路、晶版、电感、接插件、PCB、塑胶、五金等)。公司与多家电子元件工厂和代理商建立有长期稳定的合作关系:具备良好的供货周期和供成本优势:减少客户在研发阶段的采购成本及采购时间，严格的供应商稽核管理体系和IQC来料检验，恒温恒湿、ESD静电防护、先进先出管理，确保供应链源流品质
             </p>
             <p class="text-gray-600 text-base leading-relaxed italic">
-                Zhengzhou Ouke has a professional purchasing team, providing PCBA to finished product assembly OEM and component sourcing services (resistors, capacitors, diodes, triodes, integrated circuits, crystal oscillators, inductors, connectors, PCBs, plastics, hardware, etc.) for multiple customers. The company has established long-term and stable cooperative relationships with many electronic component factories and agents: it has advantages in good delivery cycles and supply costs; reduces customers' purchasing costs and time during the R&D stage; implements strict supplier audit management systems and IQC incoming inspection, constant temperature and humidity, ESD electrostatic protection, and FIFO management to ensure the quality of the supply chain from the source.
+                Zhengzhou Ouke has a professional purchasing team, providing PCBA to finished product assembly OEM and component sourcing services (resistors, capacitors, diodes, triodes, integrated circuits, crystal oscillators, inductors, connectors, PCBs, plastics, hardware, etc.) for multiple customers. The company has established long-term and stable cooperative relationships with many electronic component factories and agents: it has advantages in good delivery cycles and supply costs; reduces customers' purchasing costs and time during the R&D stage; strict supplier audit management system and IQC incoming inspection, constant temperature and humidity, ESD electrostatic protection, and FIFO management to ensure the quality of the supply chain from the source.
             </p>
         </div>
     </div>
 </section>
 
-<!-- 生产检测设备 - 全屏铺满 -->
+<!-- 自研检测设备 -->
 <section id="equipment" class="w-screen py-24 bg-light">
     <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">生产检测设备</h2>
+            <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">自研检测设备</h2>
             <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-4xl mx-auto text-lg">先进的生产检测设备，确保产品品质稳定可靠</p>
+            <p class="text-gray-600 max-w-4xl mx-auto text-lg">先进的自研检测设备，确保产品品质稳定可靠</p>
         </div>
         <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -253,7 +408,7 @@
     </div>
 </section>
 
-<!-- 适配车型 - 全屏铺满 -->
+<!-- 适配车型 -->
 <section id="series" class="w-screen py-24 bg-white">
     <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
@@ -347,7 +502,7 @@
     </div>
 </section>
 
-<!-- 产品展示 - 全屏铺满，产品卡片充分利用屏幕宽度 -->
+<!-- 产品展示 -->
 <section id="products" class="w-screen py-24 bg-light">
     <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
@@ -450,7 +605,7 @@
     </div>
 </section>
 
-<!-- 联系我们 - 全屏铺满 -->
+<!-- 联系我们 - 【已添加完整专业英文翻译】 -->
 <section id="contact" class="w-screen py-24 bg-light">
     <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
@@ -460,32 +615,47 @@
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
             <div class="bg-white p-10 rounded-lg shadow-md">
                 <ul class="space-y-8">
+                    <!-- 公司地址 -->
                     <li class="flex items-start">
                         <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-6">
                             <i class="fa-solid fa-map-marker text-2xl text-primary"></i>
                         </div>
                         <div>
                             <h4 class="font-medium text-xl mb-2">公司地址</h4>
-                            <p class="text-gray-600 text-lg">河南省郑州市管城回族区经济技术开发区第二十三大街中科智谷产业园2号楼</p>
+                            <p class="text-gray-700 text-lg mb-2">河南省郑州市管城回族区经济技术开发区第二十三大街中科智谷产业园2号楼</p>
+                            <p class="text-gray-600 text-base leading-relaxed italic">
+                                Building 2, Zhongke Zhigu Industrial Park, 23rd Avenue, Economic and Technological Development Zone, Guancheng Hui District, Zhengzhou City, Henan Province, China
+                            </p>
                         </div>
                     </li>
+                    <!-- 联系电话 -->
                     <li class="flex items-start">
                         <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-6">
                             <i class="fa-solid fa-phone text-2xl text-primary"></i>
                         </div>
                         <div>
                             <h4 class="font-medium text-xl mb-2">联系电话</h4>
-                            <p class="text-gray-600 text-lg">19128796896 / 19120698329</p>
+                            <p class="text-gray-700 text-lg mb-2">19128796896 / 19120698329</p>
+                            <p class="text-gray-600 text-base leading-relaxed italic">
+                                Contact Number: +86 19128796896 / +86 19120698329
+                            </p>
                         </div>
                     </li>
+                    <!-- 微信咨询 -->
                     <li class="flex items-start">
                         <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-6">
                             <i class="fa-brands fa-weixin text-2xl text-primary"></i>
                         </div>
                         <div>
                             <h4 class="font-medium text-xl mb-2">微信咨询</h4>
-                            <p class="text-gray-600 text-lg">19128796896（微信同号）</p>
-                            <p class="text-gray-600 mt-2 text-base">扫码添加，支持产品咨询/报价/定制</p>
+                            <p class="text-gray-700 text-lg mb-2">19128796896（微信同号）</p>
+                            <p class="text-gray-600 text-base leading-relaxed italic mb-2">
+                                WeChat ID: 19128796896 (same as phone number)
+                            </p>
+                            <p class="text-gray-600 text-base">扫码添加，支持产品咨询/报价/定制</p>
+                            <p class="text-gray-600 text-base leading-relaxed italic">
+                                Scan the code to add us, we support product consultation, quotation and customization services
+                            </p>
                         </div>
                     </li>
                 </ul>
@@ -494,13 +664,16 @@
             <div class="bg-white p-10 rounded-lg shadow-md flex flex-col items-center justify-center">
                 <h3 class="text-2xl font-semibold mb-6">微信扫码咨询</h3>
                 <img src="https://s41.ax1x.com/2026/03/21/penrnGF.png" alt="微信二维码" class="w-72 h-72 rounded-lg shadow-sm">
-                <p class="mt-4 text-gray-600 text-lg">批发/维修/定制/报价 一站式服务</p>
+                <p class="mt-4 text-gray-700 text-lg mb-2">批发/维修/定制/报价 一站式服务</p>
+                <p class="text-gray-600 text-base leading-relaxed italic">
+                    One-stop service covering wholesale, maintenance, customization and quotation
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 页脚 - 全屏铺满 -->
+<!-- 页脚 -->
 <footer class="w-screen bg-dark text-white pt-20 pb-10">
     <div class="w-full px-4">
         <p class="text-center text-gray-400 text-lg">© 2026 郑州欧克汽车零部件有限公司版权所有</p>
