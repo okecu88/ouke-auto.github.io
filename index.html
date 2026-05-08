@@ -61,6 +61,16 @@
         .factory-img {
             @apply h-60 w-full object-cover;
         }
+        /* 产品图片点击效果 */
+        .product-img-link {
+            @apply block cursor-pointer;
+        }
+        .product-img-link:hover img {
+            @apply scale-105;
+        }
+        .product-img-link img {
+            @apply transition-transform duration-300;
+        }
     </style>
 </head>
 <body class="font-sans text-dark bg-white">
@@ -472,111 +482,173 @@
     </div>
 </section>
 
-<!-- 产品展示 - 已更新第7、12位图片 -->
+<!-- 产品展示 - 已添加点击查看原图功能，第29位已替换 -->
 <section id="products" class="w-screen py-24 bg-light">
     <div class="w-full px-4 md:px-8">
         <div class="text-center mb-16">
             <h2 class="text-[clamp(2rem,3.5vw,3rem)] font-bold mb-4">产品展示</h2>
             <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-gray-600 text-lg">点击图片可查看原图</p>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 w-full">
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/17/peZjtfg.png" alt="产品展示1" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/17/peZjtfg.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/17/peZjtfg.png" alt="产品展示1" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/17/peZjYtS.png" alt="产品展示2" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/17/peZjYtS.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/17/peZjYtS.png" alt="产品展示2" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/17/peZj30P.png" alt="产品展示3" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/17/peZj30P.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/17/peZj30P.png" alt="产品展示3" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/17/peZj1mt.png" alt="产品展示4" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/17/peZj1mt.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/17/peZj1mt.png" alt="产品展示4" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <!-- 第一行第5列 -->
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/05/08/peqUUcq.md.png" alt="产品展示5" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/05/08/peqUUcq.md.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/05/08/peqUUcq.md.png" alt="产品展示5" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <!-- 第二行第1列 -->
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/05/08/peqUN3n.png" alt="产品展示6" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/05/08/peqUN3n.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/05/08/peqUN3n.png" alt="产品展示6" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
-            <!-- 第二行第2列 - 已替换为penSYVA.png -->
+            <!-- 第二行第2列 -->
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/20/penSYVA.png" alt="产品展示7" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/20/penSYVA.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/20/penSYVA.png" alt="产品展示7" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <!-- 第二行第3列 -->
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/05/08/peqU1HS.png" alt="产品展示8" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/05/08/peqU1HS.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/05/08/peqU1HS.png" alt="产品展示8" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/18/peeMWgH.png" alt="产品展示9" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/18/peeMWgH.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/18/peeMWgH.png" alt="产品展示9" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <!-- 第二行第5列 -->
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/05/08/peqUlB8.jpg" alt="产品展示10" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/05/08/peqUlB8.jpg" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/05/08/peqUlB8.jpg" alt="产品展示10" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/18/peeM6UK.png" alt="产品展示11" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/18/peeM6UK.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/18/peeM6UK.png" alt="产品展示11" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
-            <!-- 第三行第2列 - 已替换为peZjM6A.png -->
+            <!-- 第三行第2列 -->
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/17/peZjM6A.png" alt="产品展示12" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
-            </div>
-            <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/18/peeMrHx.png" alt="产品展示13" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
-            </div>
-            <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/17/peZjJk8.png" alt="产品展示14" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/17/peZjM6A.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/17/peZjM6A.png" alt="产品展示12" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/17/peZj8Tf.png" alt="产品展示15" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/18/peeMrHx.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/18/peeMrHx.png" alt="产品展示13" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/17/peZjQOI.png" alt="产品展示16" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/17/peZjJk8.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/17/peZjJk8.png" alt="产品展示14" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/19/pemm7xs.jpg" alt="产品展示17" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/17/peZj8Tf.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/17/peZj8Tf.png" alt="产品展示15" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/19/pemmT2j.jpg" alt="产品展示18" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/17/peZjQOI.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/17/peZjQOI.png" alt="产品展示16" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/19/pemm4IS.png" alt="产品展示19" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/19/pemm7xs.jpg" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/19/pemm7xs.jpg" alt="产品展示17" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/19/pemmha8.jpg" alt="产品展示20" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/19/pemmT2j.jpg" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/19/pemmT2j.jpg" alt="产品展示18" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/19/pemmfVf.png" alt="产品展示21" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/19/pemm4IS.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/19/pemm4IS.png" alt="产品展示19" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/19/pemmRqP.png" alt="产品展示22" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/19/pemmha8.jpg" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/19/pemmha8.jpg" alt="产品展示20" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/20/peniSpt.png" alt="产品展示23" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/19/pemmfVf.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/19/pemmfVf.png" alt="产品展示21" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
+            </div>
+            <div class="product-card">
+                <a href="https://s41.ax1x.com/2026/03/19/pemmRqP.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/19/pemmRqP.png" alt="产品展示22" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
+            </div>
+            <div class="product-card">
+                <a href="https://s41.ax1x.com/2026/03/20/peniSpt.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/20/peniSpt.png" alt="产品展示23" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <!-- 第五行第4列 -->
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/05/08/peqUQnf.jpg" alt="产品展示24" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/05/08/peqUQnf.jpg" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/05/08/peqUQnf.jpg" alt="产品展示24" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/20/penStUI.png" alt="产品展示25" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/20/penStUI.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/20/penStUI.png" alt="产品展示25" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/20/penS3Ke.png" alt="产品展示26" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/20/penS3Ke.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/20/penS3Ke.png" alt="产品展示26" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/20/penS8DH.png" alt="产品展示27" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/20/penS8DH.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/20/penS8DH.png" alt="产品展示27" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/20/penSGbd.png" alt="产品展示28" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/20/penSGbd.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/20/penSGbd.png" alt="产品展示28" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
+            </div>
+            <!-- 第六行第4列 - 第29位，已替换为peeM4KA.png -->
+            <div class="product-card">
+                <a href="https://s41.ax1x.com/2026/03/18/peeM4KA.png" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/18/peeM4KA.png" alt="产品展示29" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
             <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/20/penPxfI.jpg" alt="产品展示29" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
-            </div>
-            <div class="product-card">
-                <img src="https://s41.ax1x.com/2026/03/20/penSlvD.jpg" alt="产品展示30" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                <a href="https://s41.ax1x.com/2026/03/20/penSlvD.jpg" target="_blank" class="product-img-link">
+                    <img src="https://s41.ax1x.com/2026/03/20/penSlvD.jpg" alt="产品展示30" class="w-full h-auto object-contain rounded-md" onerror="this.style.display='none'">
+                </a>
             </div>
         </div>
     </div>
